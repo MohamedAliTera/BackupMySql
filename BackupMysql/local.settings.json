@@ -1,0 +1,8 @@
+{
+    "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=extocare;AccountKey=huz5O716CD/9seTSDsh2hFtxHBT/O+jeuqBqcn5hHsfwyO6jnC2wx019Ioj9IiTWZqhV15rwShPC+ASt76gwjQ==;EndpointSuffix=core.windows.net",
+    "MySqlConnection": "datasource= db-mysql-nyc3-61603-do-user-7751316-0.b.db.ondigitalocean.com; port=25060; username=doadmin; password=no4kovkej80yerh9;database=ExtocareAutowash;charset=utf8mb4;convertzerodatetime=true;default command timeout=0",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated"
+  }
+}
