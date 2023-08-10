@@ -36,11 +36,12 @@ public class BackupDatabase
         }
         catch (Exception ex)
         {
-            _logger.LogError("An error occurred: {message}", ex.Message);
+
+            _logger.LogError("An error occurred: {message}", ex.ToString());
 
             var response = req.CreateResponse(HttpStatusCode.BadRequest);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-            response.WriteString(ex.Message);
+            response.WriteString(ex.ToString());
             return response;
         }
     }
@@ -51,7 +52,7 @@ public class BackupDatabase
     /// <param name="myTimer"></param>
     /// <returns></returns>
     [Function("BackupActiveTimer")]
-    public async Task RunBackupActiveTiimer([TimerTrigger("0 17 * * *")] MyInfo myTimer)
+    public async Task RunBackupActiveTimer([TimerTrigger("0 17 * * *")] MyInfo myTimer)
     {
         _logger.LogInformation("Started daily database backup triggerred by timer");
 
@@ -64,7 +65,7 @@ public class BackupDatabase
         }
         catch (Exception ex)
         {
-            _logger.LogError("An error occurred: {message}", ex.Message);
+            _logger.LogError("An error occurred: {message}", ex.ToString());
         }
     }
 
@@ -85,15 +86,15 @@ public class BackupDatabase
         }
         catch (Exception ex)
         {
-            _logger.LogError("An error occurred: {message}", ex.Message);
+            _logger.LogError("An error occurred: {message}", ex.ToString());
         }
     }
 
 
     private async Task BackupActive()
     {
-        string connectionString = Environment.GetEnvironmentVariable("MySqlConnection") ?? throw new NullReferenceException();
-        string storageConnectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage") ?? throw new NullReferenceException();
+        string connectionString = Environment.GetEnvironmentVariable("MySqlConnection") ?? throw new NullReferenceException("connection string was null");
+        string storageConnectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage") ?? throw new NullReferenceException("Storage connection was null");
         string containerName = "databasebackups";
 
         var blobServiceClient = new BlobServiceClient(storageConnectionString);
